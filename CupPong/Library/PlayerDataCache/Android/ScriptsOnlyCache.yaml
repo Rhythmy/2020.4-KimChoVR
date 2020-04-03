@@ -20,8 +20,10 @@ ScriptsOnlyBuild:
     - OVRPlayerController
     - OVRSceneSampleController
     - OVRScreenFade
+    Unity.CollabProxy.Editor.dll:
+    - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
+    - Unity.Cloud.Collaborate.UserInterface.WindowCache
     Unity.Mobile.AndroidLogcat.Editor.dll:
-    - Unity.Android.Logcat.AndroidLogcatConsoleWindow
     - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
@@ -30,8 +32,6 @@ ScriptsOnlyBuild:
     Unity.XR.Management.dll:
     - UnityEngine.XR.Management.XRGeneralSettings
     - UnityEngine.XR.Management.XRManagerSettings
-    Unity.XR.Oculus.Editor.dll:
-    - Unity.XR.Oculus.Editor.OculusSettingsEditor
     Unity.XR.Oculus.dll:
     - Unity.XR.Oculus.OculusLoader
     - Unity.XR.Oculus.OculusSettings
@@ -84,37 +84,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11890}
     - Class: 114
-      Script: {instanceID: 12056}
+      Script: {instanceID: 12064}
     - Class: 114
-      Script: {instanceID: 12290}
+      Script: {instanceID: 12302}
     - Class: 114
-      Script: {instanceID: 12428}
+      Script: {instanceID: 12440}
     - Class: 114
-      Script: {instanceID: 12670}
+      Script: {instanceID: 12688}
     - Class: 114
-      Script: {instanceID: 12724}
+      Script: {instanceID: 12744}
     - Class: 114
-      Script: {instanceID: 12940}
+      Script: {instanceID: 12964}
     - Class: 114
-      Script: {instanceID: 13116}
+      Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13246}
+      Script: {instanceID: 13278}
     - Class: 114
-      Script: {instanceID: 13252}
+      Script: {instanceID: 13284}
     - Class: 114
-      Script: {instanceID: 13366}
+      Script: {instanceID: 13400}
     - Class: 114
-      Script: {instanceID: 13426}
+      Script: {instanceID: 13462}
     - Class: 114
-      Script: {instanceID: 13442}
+      Script: {instanceID: 13478}
     - Class: 114
-      Script: {instanceID: 13838}
+      Script: {instanceID: 13880}
     - Class: 114
-      Script: {instanceID: 13888}
+      Script: {instanceID: 13930}
     - Class: 114
-      Script: {instanceID: 14320}
+      Script: {instanceID: 14376}
     - Class: 114
-      Script: {instanceID: 14428}
+      Script: {instanceID: 14486}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 134
@@ -1733,4 +1733,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: /Users/davidkim/Desktop/Coding/Unity/CupPong/CupPong.apk
+  playerPath: /Users/davidkim/Desktop/Github/KimChoVR/CupPong/Build/CupPong.apk
