@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{1002DAC6-AEFD-F620-716E-D68E8674DABC}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Oculus/SampleFramework/Core/DistanceGrab/Scripts/DistanceGrabber.cs">
+    <Files>
+      <File FileName="Assets/Oculus/SampleFramework/Core/DistanceGrab/Scripts/DistanceGrabber.cs" Line="91" Column="1" />
+      <File FileName="Assets/Oculus/SampleFramework/Core/DistanceGrab/Scripts/DistanceGrabber.cs" Line="91" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CupPong" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="92c92fad-5ccc-442a-a196-1a1dfabbbb16" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
