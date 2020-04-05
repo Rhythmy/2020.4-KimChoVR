@@ -65,7 +65,7 @@ namespace SimpleDemos
         {
             //Set scale values to 1 because you can't have a a scale of 0
             m_ScaleToAmount = Vector3.one;
-            m_AdditiveScaleAmount = new Vector3(0.001f, 0.001f, 0.001f);
+            m_AdditiveScaleAmount = new Vector3(0, 0, 0);
             m_Angle = 0;
         }
 
@@ -160,7 +160,7 @@ namespace SimpleDemos
                     }
                     else //Custom axis
                     {
-                        rotateAmount = Quaternion.AngleAxis(m_Angle, m_MyCustomAxis.normalized);
+                        rotateAmount = Quaternion.Euler(m_MyCustomAxis);
                     }
                     //Send new rotation position
                     rotateAmount.Normalize(); //Normalize to prevent data overflow

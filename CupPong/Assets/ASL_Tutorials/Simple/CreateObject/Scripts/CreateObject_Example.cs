@@ -20,7 +20,11 @@ namespace SimpleDemos
             /// <summary>Spawn a primitive with all the spawn parameters possible</summary>
             FullPrimitive,
             /// <summary>Spawn a prefab with all the spawn parameters possible</summary>
-            FullPrefab
+            FullPrefab,
+            /// <summary>Spawn a Cup prefab</summary>
+            CupPrefab,
+            /// <summary>Spawn a PingPongBall prefab</summary>
+            PingPongBall
         }
 
         /// <summary>The object type that will be created</summary>
@@ -91,6 +95,20 @@ namespace SimpleDemos
                     //(where this code was written) namespace and class name. Also note that the assembly part for adding a component (the part after the comma)
                     //does not need to be included when the component you are adding is your own script - but the namespace is still needed
                     ASL.ASLHelper.InstanitateASLObject("_ASL_ExamplePrefab",
+                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
+                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
+                        ClaimRecoveryFunction,
+                        MyFloatsFunction);
+                } else if (m_CreateObject == ObjectToCreate.CupPrefab)
+                {
+                    ASL.ASLHelper.InstanitateASLObject("Cup",
+                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
+                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
+                        ClaimRecoveryFunction,
+                        MyFloatsFunction);
+                } else if (m_CreateObject == ObjectToCreate.PingPongBall)
+                {
+                    ASL.ASLHelper.InstanitateASLObject("PingPongBall",
                         new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,
