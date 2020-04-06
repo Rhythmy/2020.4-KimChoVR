@@ -5,11 +5,11 @@ using UnityEngine;
 namespace SimpleDemos
 {
     /// <summary>
-    /// An example of how to use SendFloat4. While you can only send 4 values at a time, if you need your object to 5+ different
+    /// An example of how to use SendFloatArray. While you can only send 4 values at a time, if you need your object to 5+ different
     /// values, at different times, you can do this via a switch/case, like this example shows. If you are using 4 of less values
     /// Then there is no need to use the switch example, but instead to just assign your values as you need them.
     /// </summary>
-    public class SendFloat4_Example : MonoBehaviour
+    public class SendFloatArray_Example : MonoBehaviour
     {
         /// <summary>Provides an easy way to access the object we want to send floats with/for. </summary>
         public GameObject m_ObjectToSendFloats;
@@ -46,7 +46,7 @@ namespace SimpleDemos
                         }
                     }
                     Debug.Log(floats);
-                    m_ObjectToSendFloats.GetComponent<ASL.ASLObject>().SendFloat4(m_MyFloats);
+                    m_ObjectToSendFloats.GetComponent<ASL.ASLObject>().SendFloatArray(m_MyFloats);
                 });
                 m_SendFloat = false;
             }
@@ -56,7 +56,7 @@ namespace SimpleDemos
         /// and reservering the last index for the switch value, I can execute more than 4 different things with this 
         /// 1 function depending on what floats I want to send.</summary>
         /// <param name="_myFloats">My float 4 array</param>
-        /// <param name="_id">The id of the object that called <see cref="ASL.ASLObject.SendFloat4(float[])"/></param>
+        /// <param name="_id">The id of the object that called <see cref="ASL.ASLObject.SendFloatArray_Example(float[])"/></param>
         public static void MyFloatFunction(string _id, float[] _myFloats)
         {
             string floats = "Floats received: ";

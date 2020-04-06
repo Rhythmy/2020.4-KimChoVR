@@ -20,11 +20,7 @@ namespace SimpleDemos
             /// <summary>Spawn a primitive with all the spawn parameters possible</summary>
             FullPrimitive,
             /// <summary>Spawn a prefab with all the spawn parameters possible</summary>
-            FullPrefab,
-            /// <summary>Spawn a Cup prefab</summary>
-            CupPrefab,
-            /// <summary>Spawn a PingPongBall prefab</summary>
-            PingPongBall
+            FullPrefab
         }
 
         /// <summary>The object type that will be created</summary>
@@ -99,20 +95,6 @@ namespace SimpleDemos
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,
                         MyFloatsFunction);
-                } else if (m_CreateObject == ObjectToCreate.CupPrefab)
-                {
-                    ASL.ASLHelper.InstanitateASLObject("Cup",
-                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
-                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
-                        ClaimRecoveryFunction,
-                        MyFloatsFunction);
-                } else if (m_CreateObject == ObjectToCreate.PingPongBall)
-                {
-                    ASL.ASLHelper.InstanitateASLObject("PingPongBall",
-                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
-                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
-                        ClaimRecoveryFunction,
-                        MyFloatsFunction);
                 }
 
                 m_SpawnObject = false; //Reset to false to prevent multiple unwanted spawns
@@ -151,7 +133,7 @@ namespace SimpleDemos
             _myGameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
             {
                 float[] myFloats = { 1, 2, 3, 4 };
-                _myGameObject.GetComponent<ASL.ASLObject>().SendFloat4(myFloats);
+                _myGameObject.GetComponent<ASL.ASLObject>().SendFloatArray(myFloats);
             });
         }
 
@@ -184,7 +166,7 @@ namespace SimpleDemos
         }
 
         /// <summary>
-        /// A function that is called whenever an ASL object calls <see cref="ASL.ASLObject.SendFloat4(float[])"/>.
+        /// A function that is called whenever an ASL object calls <see cref="ASL.ASLObject.SendFloatArray(float[])"/>.
         /// This function can be assigned to an ASL object upon creation.
         /// </summary>
         /// <param name="_id"></param>
