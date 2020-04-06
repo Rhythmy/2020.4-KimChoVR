@@ -20,11 +20,40 @@ public class HandTriggerScript : MonoBehaviour
     {
         if (otherCollider.GetComponent<ASL.ASLObject>() != null)
         {
-            Debug.Log("Collided with server object attempt claim!");
-            otherCollider.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            if (otherCollider.tag == "GameController")
             {
-                Debug.Log("Successfully claimed object!");
-            });
+                if (!otherCollider.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
+                {
+                    otherCollider.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        Debug.Log("Successfully claimed object! " + otherCollider.name);
+                    });
+                }
+                else
+                {
+                    Debug.Log("Already own this object");
+                }
+            }
+        }
+    }
+
+    void OnTriggerStay(Collider otherCollider)
+    {
+        if (otherCollider.GetComponent<ASL.ASLObject>() != null)
+        {
+            if (otherCollider.tag == "GameController")
+            {
+                if (!otherCollider.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
+                {
+                    otherCollider.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        Debug.Log("Successfully claimed object! " + otherCollider.name);
+                    });
+                } else
+                {
+                    Debug.Log("Already own this object");
+                }
+            }
         }
     }
 }

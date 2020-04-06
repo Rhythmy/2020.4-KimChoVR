@@ -8,6 +8,7 @@ public class SendPositionUpdates : MonoBehaviour
     // Reference ASL Scripts
     public SimpleDemos.TransformObjectViaLocalSpace_Example ASLTransformScript;
     public ASL.ASLObject aslObject;
+    public ASL.ASLObject thisASLObject;
 
     // Private Data
     private Vector3 previousPosition;
@@ -17,34 +18,20 @@ public class SendPositionUpdates : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (this.ASLTransformScript == null)
-        {
-            this.ASLTransformScript = this.GetComponent<SimpleDemos.TransformObjectViaLocalSpace_Example>();
-        }
-
-        if (this.aslObject == null)
-        {
-            this.aslObject = this.GetComponent<ASL.ASLObject>();
-        }
-
         this.previousPosition = this.transform.position;
         this.previousRotation = this.transform.localEulerAngles;
-
-        //this.ASLTransformScript.m_SendAdditiveTransform = true;
-
-        this.timer = 0.0f;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (!aslObject.m_Mine)
+        if (!thisASLObject.m_Mine)
         {
             return;
         }
 
-        if (!this.previousPosition.Equals(this.transform.position) && this.timer >= 0.2f ||
-            !this.previousRotation.Equals(this.transform.localEulerAngles) && this.timer >= 0.2f)
+        if (!this.previousPosition.Equals(this.transform.position) ||
+            !this.previousRotation.Equals(this.transform.localEulerAngles))
         {
             // Handle Position
             this.ASLTransformScript.m_MoveToPosition = this.transform.position;
@@ -61,8 +48,6 @@ public class SendPositionUpdates : MonoBehaviour
             this.previousRotation = this.transform.localEulerAngles;
             this.timer = 0.0f;
         }
-
-        this.timer += Time.fixedDeltaTime;
     }
 
     /*

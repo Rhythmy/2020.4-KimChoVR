@@ -94,6 +94,7 @@
     <Compile Include="Assets\ASL_Tutorials\Simple\TransformObjectViaLocalSpace\Scripts\TransformObjectViaLocalSpace_Example.cs" />
     <Compile Include="Assets\ASL_Tutorials\Simple\TransformObjectViaWorldSpace\Scripts\TransformObjectViaWorldSpace_Example.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\HandTriggerScript.cs" />
+    <Compile Include="Assets\KimChoAssets\Scripts\ObjectController.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\SendPositionUpdates.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />

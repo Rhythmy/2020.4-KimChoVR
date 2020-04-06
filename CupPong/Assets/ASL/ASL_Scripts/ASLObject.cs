@@ -161,7 +161,7 @@ namespace ASL
         ///     }, 0, false); //Hold on to this object until someone steals it, but don't reset whatever our current length of time we have already held on to it for
         /// }
         /// </code></example>
-        public void SendAndSetClaim(ClaimCallback callback, int claimTimeOut = 1000, bool resetClaimTimeout = true)
+        public void SendAndSetClaim(ClaimCallback callback, int claimTimeOut = 0, bool resetClaimTimeout = true)
         {
             if (Time.timeScale == 0) { return; } //Time scale is set to 0 when not all ASL objects have been assigned an id yet - once all assigned, time will resume
             if (!m_Mine) //If we already own the object, don't send anything and instead call our callback right away
