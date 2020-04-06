@@ -160,7 +160,7 @@ namespace SimpleDemos
                     }
                     else //Custom axis
                     {
-                        rotateAmount = Quaternion.AngleAxis(m_Angle, m_MyCustomAxis.normalized);
+                        rotateAmount = Quaternion.Euler(m_MyCustomAxis);
                     }
                     //Send new rotation position
                     rotateAmount.Normalize(); //Normalize to prevent data overflow
