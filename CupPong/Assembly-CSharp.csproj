@@ -94,6 +94,8 @@
     <Compile Include="Assets\ASL_Tutorials\Simple\TransformObjectViaLocalSpace\Scripts\TransformObjectViaLocalSpace_Example.cs" />
     <Compile Include="Assets\ASL_Tutorials\Simple\TransformObjectViaWorldSpace\Scripts\TransformObjectViaWorldSpace_Example.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\DebugScript.cs" />
+    <Compile Include="Assets\KimChoAssets\Scripts\DontDestroyMR.cs" />
+    <Compile Include="Assets\KimChoAssets\Scripts\DontDestroyRaycast.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\HandTriggerScript.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\ObjectController.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\PlayerControllerScript.cs" />
