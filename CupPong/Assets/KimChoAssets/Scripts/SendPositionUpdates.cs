@@ -38,7 +38,7 @@ public class SendPositionUpdates : MonoBehaviour
             this.ASLTransformScript.m_SendTransform = true;
 
             // Handle Scale
-            this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale;
+            this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale - (this.transform.localScale * 0.1f);
 
             // Handle Rotation
             this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;

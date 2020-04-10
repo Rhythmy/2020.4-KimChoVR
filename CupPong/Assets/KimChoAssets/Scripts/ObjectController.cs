@@ -20,6 +20,6 @@ public class ObjectController : MonoBehaviour
         // If the object is not ours, have it sync with the connected local object.
         this.transform.position = objectToSyncWith.transform.position;
         this.transform.rotation = objectToSyncWith.transform.rotation;
-        this.transform.localScale = objectToSyncWith.transform.localScale;
+        this.transform.localScale = objectToSyncWith.transform.localScale + (objectToSyncWith.transform.localScale * 0.1f);
     }
 }

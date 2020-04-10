@@ -16,43 +16,20 @@ public class HandTriggerScript : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider otherCollider)
+    public void ClaimMe()
     {
-        if (otherCollider.GetComponent<ASL.ASLObject>() != null)
+        if (this.gameObject.GetComponent<ASL.ASLObject>() != null)
         {
-            if (otherCollider.tag == "GameController")
+            if (!this.gameObject.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
             {
-                if (!otherCollider.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
+                this.gameObject.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
                 {
-                    otherCollider.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                    {
-                        Debug.Log("Successfully claimed object! " + otherCollider.name);
-                    });
-                }
-                else
-                {
-                    Debug.Log("Already own this object");
-                }
+                    Debug.Log("Successfully claimed object! " + this.gameObject.name);
+                });
             }
-        }
-    }
-
-    void OnTriggerStay(Collider otherCollider)
-    {
-        if (otherCollider.GetComponent<ASL.ASLObject>() != null)
-        {
-            if (otherCollider.tag == "GameController")
+            else
             {
-                if (!otherCollider.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
-                {
-                    otherCollider.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                    {
-                        Debug.Log("Successfully claimed object! " + otherCollider.name);
-                    });
-                } else
-                {
-                    Debug.Log("Already own this object");
-                }
+                Debug.Log("Already own this object");
             }
         }
     }
