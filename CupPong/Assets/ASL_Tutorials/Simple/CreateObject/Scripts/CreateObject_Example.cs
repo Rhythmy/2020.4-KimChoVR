@@ -13,14 +13,7 @@ namespace SimpleDemos
         /// </summary>
         public enum ObjectToCreate
         {
-            /// <summary>Spawn a primitive with the basic spawn parameters</summary>
-            SimplePrimitive,
-            /// <summary>Spawn a prefab with the basic spawn parameters</summary>
-            SimplePrefab,
-            /// <summary>Spawn a primitive with all the spawn parameters possible</summary>
-            FullPrimitive,
-            /// <summary>Spawn a prefab with all the spawn parameters possible</summary>
-            FullPrefab
+            CapsulePlayer
         }
 
         /// <summary>The object type that will be created</summary>
@@ -46,51 +39,9 @@ namespace SimpleDemos
         {
             if (m_SpawnObject)
             {
-                if (m_CreateObject == ObjectToCreate.SimplePrimitive)
+                if (m_CreateObject == ObjectToCreate.CapsulePlayer)
                 {
-                    //Creates a cube at a random location with a normal rotation orientation
-                    ASL.ASLHelper.InstanitateASLObject(PrimitiveType.Cube,
-                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)),
-                        Quaternion.identity);
-                }
-                else if (m_CreateObject == ObjectToCreate.SimplePrefab)
-                {
-                    //Creates a prefab that is located in Resources/MyPrefabs at a random location with
-                    //a normal rotation orientation. Note that this prefab must be the specified (above)
-                    //folder location in order to be found and spawned.
-                    ASL.ASLHelper.InstanitateASLObject("_ASL_ExamplePrefab",
-                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)),
-                        Quaternion.identity);
-                }
-                else if (m_CreateObject == ObjectToCreate.FullPrimitive)
-                {
-                    //Creates a sphere primitive at a random location with a normal rotation orientation, giving it no parent, adding the Rigidbody
-                    //component using the Rigidbody's namespace (the first part) and assembly name (the part after the comma) and then setting the function
-                    //to be called upon object creation, if a claim gets rejected, and when floats are sent with this object. Note that
-                    //GetType().Namespace + "." + GetType().Name gets the namespace and class name of the function that this object should reference
-                    //The values can be typed in manually if desired, and these functions can also exist in different classes (can exist in a class
-                    //that the object is not being instantiated in) however, if done this way, then the namespace and class name must be manually entered
-                    //As GetType grabs 'this' (where this code was written) namespace and class name. Also note that the assembly part for adding a component (the part after the comma)
-                    //does not need to be included when the component you are adding is your own script - but the namespace is still needed
-                    ASL.ASLHelper.InstanitateASLObject(PrimitiveType.Sphere,
-                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
-                        WhatToDoWithMyGameObjectNowThatItIsCreated,
-                        ClaimRecoveryFunction,
-                        MyFloatsFunction);
-
-                }
-                else if (m_CreateObject == ObjectToCreate.FullPrefab)
-                {
-                    //Creates a prefab that is located in Resources/MyPrefabs at a random location with a normal rotation orientation, 
-                    //giving it no parent,  adding the Rigidbody component using the Rigidbody's namespace (the first part) and assembly 
-                    //name (the part after the comma) and then setting the function to be called upon object creation, if a claim gets rejected, 
-                    //and when floats are sent with this object. Note that GetType().Namespace + "." + GetType().Name gets the namespace 
-                    //and class name of the function that this object should reference. The values can be typed in manually if desired, 
-                    //and these functions can also exist in different classes (can exist in a class that the object is not being instantiated in) 
-                    //however, if done this way, then the namespace and class name must be manually entered As GetType grabs 'this' 
-                    //(where this code was written) namespace and class name. Also note that the assembly part for adding a component (the part after the comma)
-                    //does not need to be included when the component you are adding is your own script - but the namespace is still needed
-                    ASL.ASLHelper.InstanitateASLObject("_ASL_ExamplePrefab",
+                    ASL.ASLHelper.InstanitateASLObject("Capsule_Player",
                         new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,

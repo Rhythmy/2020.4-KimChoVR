@@ -13,7 +13,6 @@ public class SendPositionUpdates : MonoBehaviour
     // Private Data
     private Vector3 previousPosition;
     private Vector3 previousRotation;
-    private float timer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +28,6 @@ public class SendPositionUpdates : MonoBehaviour
         {
             return;
         }
-
-        Debug.Log(this.gameObject.GetComponent<Rigidbody>().velocity);
 
         if (!this.previousPosition.Equals(this.transform.position) ||
             !this.previousRotation.Equals(this.transform.localEulerAngles))
@@ -48,7 +45,6 @@ public class SendPositionUpdates : MonoBehaviour
 
             this.previousPosition = this.transform.position;
             this.previousRotation = this.transform.localEulerAngles;
-            this.timer = 0.0f;
         }
     }
 

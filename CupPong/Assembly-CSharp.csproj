@@ -98,9 +98,10 @@
     <Compile Include="Assets\KimChoAssets\Scripts\DontDestroyRaycast.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\HandTriggerScript.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\ObjectController.cs" />
-    <Compile Include="Assets\KimChoAssets\Scripts\PlayerControllerScript.cs" />
+    <Compile Include="Assets\KimChoAssets\Scripts\PlayerAvatarScript.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\PlayerGravityScript.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\SendPositionUpdates.cs" />
+    <Compile Include="Assets\KimChoAssets\Scripts\SpawnPlayer.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\ThrowingScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
