@@ -30,6 +30,8 @@ public class SendPositionUpdates : MonoBehaviour
             return;
         }
 
+        Debug.Log(this.gameObject.GetComponent<Rigidbody>().velocity);
+
         if (!this.previousPosition.Equals(this.transform.position) ||
             !this.previousRotation.Equals(this.transform.localEulerAngles))
         {

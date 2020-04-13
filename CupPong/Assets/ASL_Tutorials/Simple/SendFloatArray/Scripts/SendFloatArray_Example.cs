@@ -73,6 +73,7 @@ namespace SimpleDemos
             //We aren't actually sending what the comments in the case statement are saying (e.g., we aren't sending a player's
             //score.) We are simply giving an example of what could be sent using this switch method. If the user only has
             //a need for 4 or less values, then obviously a switch statement is not necessary.
+            /*
             switch (_myFloats[3])
             {
                 case 0:
@@ -108,6 +109,7 @@ namespace SimpleDemos
                     Debug.Log("This example does not do anything specific for m_MyFloats[3] above 5");
                     break;
             }
+            */
         }
     }
 }
