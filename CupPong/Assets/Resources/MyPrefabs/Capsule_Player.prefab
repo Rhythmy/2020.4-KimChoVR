@@ -135,4 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerASL: {fileID: 0}
   sendPositionScript: {fileID: 0}
-  playerToSyncWith: {fileID: 0}
+  avatarPartToSyncWith: {fileID: 0}
+  avatar: 1
+  mesh: {fileID: 5691050336057966551}

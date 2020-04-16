@@ -15,22 +15,4 @@ public class HandTriggerScript : MonoBehaviour
     {
         
     }
-
-    public void ClaimMe()
-    {
-        if (this.gameObject.GetComponent<ASL.ASLObject>() != null)
-        {
-            if (!this.gameObject.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
-            {
-                this.gameObject.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                {
-                    Debug.Log("Successfully claimed object! " + this.gameObject.name);
-                });
-            }
-            else
-            {
-                Debug.Log("Already own this object");
-            }
-        }
-    }
 }

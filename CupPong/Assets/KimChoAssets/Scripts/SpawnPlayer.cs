@@ -5,13 +5,12 @@ using UnityEngine;
 public class SpawnPlayer : MonoBehaviour
 {
     public SimpleDemos.CreateObject_Example spawnScript;
+    public SimpleDemos.CreateObject_Example.ObjectToCreate objectToSpawn;
 
     // On start, creates players avatar
     void Start()
     {
-        spawnScript = this.gameObject.GetComponent<SimpleDemos.CreateObject_Example>();
-
-        spawnScript.m_CreateObject = SimpleDemos.CreateObject_Example.ObjectToCreate.CapsulePlayer;
+        spawnScript.m_CreateObject = objectToSpawn;
         spawnScript.m_SpawnObject = true;
     }
 }

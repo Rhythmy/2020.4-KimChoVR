@@ -13,7 +13,9 @@ namespace SimpleDemos
         /// </summary>
         public enum ObjectToCreate
         {
-            CapsulePlayer
+            CapsulePlayer,
+            GizmoLeft,
+            GizmoRight
         }
 
         /// <summary>The object type that will be created</summary>
@@ -42,6 +44,20 @@ namespace SimpleDemos
                 if (m_CreateObject == ObjectToCreate.CapsulePlayer)
                 {
                     ASL.ASLHelper.InstanitateASLObject("Capsule_Player",
+                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
+                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
+                        ClaimRecoveryFunction,
+                        MyFloatsFunction);
+                } else if (m_CreateObject == ObjectToCreate.GizmoLeft)
+                {
+                    ASL.ASLHelper.InstanitateASLObject("GizmoLeft",
+                        new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
+                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
+                        ClaimRecoveryFunction,
+                        MyFloatsFunction);
+                } else if (m_CreateObject == ObjectToCreate.GizmoRight)
+                {
+                    ASL.ASLHelper.InstanitateASLObject("GizmoRight",
                         new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,

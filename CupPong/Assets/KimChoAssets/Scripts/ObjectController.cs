@@ -1,13 +1,35 @@
-﻿using System.Collections;
+﻿using Microsoft.MixedReality.Toolkit.Input;
+using Microsoft.MixedReality.Toolkit.Physics;
+using Microsoft.MixedReality.Toolkit.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
-public class ObjectController : MonoBehaviour
+public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMixedRealityFocusChangedHandler
 {
-    public ASL.ASLObject thisASLObject;
-    public ASL.ASLObject aslObjectToSyncWith;
-    public GameObject objectToSyncWith;
+    // Scripts
     public SimpleDemos.SendFloatArray_Example floatObject;
+    public SimpleDemos.TransformObjectViaLocalSpace_Example ASLTransformScript;
+
+    // GameObjects
+    //public GameObject objectToFollow;
+
+    // Flags
+    public bool leftGrab;
+    public bool rightGrab;
+
+    // Private Data
+    private Vector3 previousPosition;
+    private Vector3 previousRotation;
+    
+    void Start()
+    {
+        this.previousPosition = this.transform.position;
+        this.previousRotation = this.transform.localEulerAngles;
+    }
 
     // Update is called once per frame
     void Update()
@@ -16,15 +38,35 @@ public class ObjectController : MonoBehaviour
         handleObjectKinematic();
 
         // If the object is ours, then do nothing with it.
-        if (thisASLObject.m_Mine)
+        if (this.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
         {
             return;
         }
+        
+        sendTransformUpdates();
 
-        // If the object is not ours, have it sync with the connected local object.
-        this.transform.position = objectToSyncWith.transform.position;
-        this.transform.rotation = objectToSyncWith.transform.rotation;
-        this.transform.localScale = objectToSyncWith.transform.localScale + (objectToSyncWith.transform.localScale * 0.1f);
+    }
+
+    public void sendTransformUpdates()
+    {
+        if (!this.previousPosition.Equals(this.transform.position) ||
+            !this.previousRotation.Equals(this.transform.localEulerAngles))
+        {
+            // Handle Position
+            this.ASLTransformScript.m_MoveToPosition = this.transform.position;
+
+            // Handle Scale
+            this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale;
+
+            // Handle Rotation
+            this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
+            this.ASLTransformScript.m_MyCustomAxis = this.transform.eulerAngles;
+
+            this.previousPosition = this.transform.position;
+            this.previousRotation = this.transform.localEulerAngles;
+
+            this.ASLTransformScript.m_SendTransform = true;
+        }
     }
 
     public void makeKinematic()
@@ -56,6 +98,96 @@ public class ObjectController : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void ClaimMe()
+    {
+        if (this.gameObject.GetComponent<ASL.ASLObject>() != null)
+        {
+            if (!this.gameObject.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
+            {
+                this.gameObject.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                {
+                    Debug.Log("Successfully claimed object! " + this.gameObject.name);
+                });
+            }
+            else
+            {
+                Debug.Log("Already own this object");
+            }
+        }
+    }
+
+    public void OnBeforeFocusChange(FocusEventData eventData)
+    {
+    }
+
+    public void OnFocusChanged(FocusEventData eventData)
+    {
+    }
+
+    public void OnPointerClicked(MixedRealityPointerEventData eventData)
+    {
+    }
+
+    public void OnPointerDown(MixedRealityPointerEventData eventData)
+    {
+        if (floatObject == null)
+        {
+            return;
+        }
+
+        if (eventData != null)
+        {
+            if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Left)
+            {
+                leftGrab = true;
+            }
+
+            if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Right)
+            {
+                rightGrab = true;
+            }
+
+            floatObject.m_MyFloats[0] = 1;
+            this.transform.position = eventData.Pointer.Position;
+        }
+    }
+
+    public void OnPointerDragged(MixedRealityPointerEventData eventData)
+    {
+        if (floatObject == null)
+        {
+            return;
+        }
+
+        if (floatObject.m_MyFloats[0] == 1)
+        {
+            this.transform.position = eventData.Pointer.Position;
+        }
+    }
+
+    public void OnPointerUp(MixedRealityPointerEventData eventData)
+    {
+        if (floatObject == null)
+        {
+            return;
+        }
+
+        if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Left)
+        {
+            leftGrab = false;
+        }
+
+        if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Right)
+        {
+            rightGrab = false;
+        }
+
+        if (!leftGrab && !rightGrab)
+        {
+            floatObject.m_MyFloats[0] = 0;
         }
     }
 }

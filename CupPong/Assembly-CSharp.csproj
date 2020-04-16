@@ -93,14 +93,15 @@
     <Compile Include="Assets\ASL_Tutorials\Simple\SliderBar\Scripts\SliderController.cs" />
     <Compile Include="Assets\ASL_Tutorials\Simple\TransformObjectViaLocalSpace\Scripts\TransformObjectViaLocalSpace_Example.cs" />
     <Compile Include="Assets\ASL_Tutorials\Simple\TransformObjectViaWorldSpace\Scripts\TransformObjectViaWorldSpace_Example.cs" />
-    <Compile Include="Assets\KimChoAssets\Scripts\DebugScript.cs" />
+    <Compile Include="Assets\KimChoAssets\DeprecatedScripts\AttachToHandScript.cs" />
+    <Compile Include="Assets\KimChoAssets\DeprecatedScripts\DebugScript.cs" />
+    <Compile Include="Assets\KimChoAssets\DeprecatedScripts\SendPositionUpdates.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\DontDestroyMR.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\DontDestroyRaycast.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\HandTriggerScript.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\ObjectController.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\PlayerAvatarScript.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\PlayerGravityScript.cs" />
-    <Compile Include="Assets\KimChoAssets\Scripts\SendPositionUpdates.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\SpawnPlayer.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\ThrowingScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />

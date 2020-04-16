@@ -20,7 +20,7 @@ public class ThrowingScript : MonoBehaviour
     {
         timer += Time.fixedDeltaTime;
 
-        if (timer >= 0.2f)
+        if (timer >= 0.05f)
         {
             prevPosition = rb.position;
         }
@@ -28,8 +28,11 @@ public class ThrowingScript : MonoBehaviour
 
     public void simulateThrow()
     {
+        if (rb.isKinematic)
+        {
+            rb.isKinematic = false;
+        }
         Vector3 offSet = rb.transform.position - prevPosition;
-
-        rb.AddForce(offSet * 1000);
+        rb.AddForce(offSet * 3000);
     }
 }

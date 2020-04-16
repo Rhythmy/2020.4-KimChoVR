@@ -693,7 +693,7 @@ namespace ASL
             private IEnumerator ConnectToServer(string _dnsName, int _port, string _tokenUID, string _gameName)
             {
 #if (ASL_DEBUG)
-                ClientLogger.LogHandler = (x) => Debug.Log(x);
+                //ClientLogger.LogHandler = (x) => Debug.Log(x);
 #endif
                 //The following do not help resolve 
                 //"System.Security.Authentication.AuthenticationException: A call to SSPI failed, see inner exception. 

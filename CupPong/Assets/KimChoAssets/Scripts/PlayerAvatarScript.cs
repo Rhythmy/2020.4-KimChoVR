@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class PlayerAvatarScript : MonoBehaviour
 {
+    public enum AvatarType
+    {
+        Head,
+        Body,
+        Left,
+        Right
+    }
+
     public ASL.ASLObject playerASL;
     public SimpleDemos.TransformObjectViaLocalSpace_Example sendPositionScript;
-    public GameObject playerToSyncWith;
+    public GameObject avatarPartToSyncWith;
+    public AvatarType avatar;
+    public MeshRenderer mesh;
 
     // Private Data
     private Vector3 previousPosition;
@@ -17,12 +27,23 @@ public class PlayerAvatarScript : MonoBehaviour
     {
         playerASL = this.gameObject.GetComponent<ASL.ASLObject>();
         sendPositionScript = this.gameObject.GetComponent<SimpleDemos.TransformObjectViaLocalSpace_Example>();
-        playerToSyncWith = GameObject.FindGameObjectWithTag("MainCamera");
+
+        if (avatar == AvatarType.Body) {
+            avatarPartToSyncWith = GameObject.FindGameObjectWithTag("MainCamera");
+        }
+        else if (avatar == AvatarType.Left)
+        {
+            avatarPartToSyncWith = GameObject.FindGameObjectWithTag("LeftController");
+        }
+        else if (avatar == AvatarType.Right)
+        {
+            avatarPartToSyncWith = GameObject.FindGameObjectWithTag("RightController");
+        }
 
         sendPositionScript.m_ObjectToManipulate = this.gameObject;
 
-        this.previousPosition = playerToSyncWith.transform.position;
-        this.previousRotation = playerToSyncWith.transform.localEulerAngles;
+        this.previousPosition = avatarPartToSyncWith.transform.position;
+        this.previousRotation = avatarPartToSyncWith.transform.localEulerAngles;
 
         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
@@ -30,28 +51,77 @@ public class PlayerAvatarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerASL.m_Mine)
+        if (avatarPartToSyncWith == null)
         {
+            if (avatar == AvatarType.Body)
+            {
+                avatarPartToSyncWith = GameObject.FindGameObjectWithTag("MainCamera");
+            }
+            else if (avatar == AvatarType.Left)
+            {
+                avatarPartToSyncWith = GameObject.FindGameObjectWithTag("LeftController");
+            }
+            else if (avatar == AvatarType.Right)
+            {
+                avatarPartToSyncWith = GameObject.FindGameObjectWithTag("RightController");
+            }
             return;
         }
 
-        if (!this.previousPosition.Equals(playerToSyncWith.transform.position) ||
-            !this.previousRotation.Equals(playerToSyncWith.transform.localEulerAngles))
+        if (!playerASL.m_Mine)
         {
-            // Handle Position
-            this.sendPositionScript.m_MoveToPosition = playerToSyncWith.transform.position;
-
-            // Handle Scale
-            this.sendPositionScript.m_ScaleToAmount = new Vector3(0.4f, 0.4f, 0.4f);
-
-            // Handle Rotation
-            this.sendPositionScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
-            this.sendPositionScript.m_MyCustomAxis = playerToSyncWith.transform.eulerAngles;
-
-            this.previousPosition = playerToSyncWith.transform.position;
-            this.previousRotation = playerToSyncWith.transform.localEulerAngles;
-
-            this.sendPositionScript.m_SendTransform = true;
+            mesh.gameObject.SetActive(true);
+            return;
         }
+
+        if (avatar != AvatarType.Body)
+        {
+            mesh.gameObject.SetActive(false);
+        }
+
+        if (!this.previousPosition.Equals(avatarPartToSyncWith.transform.position) ||
+            !this.previousRotation.Equals(avatarPartToSyncWith.transform.localEulerAngles))
+        {
+            if (avatar == AvatarType.Body)
+            {
+                SendBodyUpdates();
+            } else if (avatar == AvatarType.Left || avatar == AvatarType.Right)
+            {
+                SendControllerUpdates();
+            }
+        }
+    }
+
+    void SendBodyUpdates()
+    {
+        // Handle Position
+        this.sendPositionScript.m_MoveToPosition = avatarPartToSyncWith.transform.position;
+
+        // Handle Scale
+        this.sendPositionScript.m_ScaleToAmount = new Vector3(0.4f, 0.4f, 0.4f);
+
+        // Handle Rotation
+        this.sendPositionScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
+        this.sendPositionScript.m_MyCustomAxis = avatarPartToSyncWith.transform.eulerAngles;
+
+        this.previousPosition = avatarPartToSyncWith.transform.position;
+        this.previousRotation = avatarPartToSyncWith.transform.localEulerAngles;
+
+        this.sendPositionScript.m_SendTransform = true;
+    }
+
+    void SendControllerUpdates()
+    {
+        // Handle Position
+        this.sendPositionScript.m_MoveToPosition = avatarPartToSyncWith.transform.position;
+
+        // Handle Rotation
+        this.sendPositionScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
+        this.sendPositionScript.m_MyCustomAxis = avatarPartToSyncWith.transform.eulerAngles;
+
+        this.previousPosition = avatarPartToSyncWith.transform.position;
+        this.previousRotation = avatarPartToSyncWith.transform.localEulerAngles;
+
+        this.sendPositionScript.m_SendTransform = true;
     }
 }
