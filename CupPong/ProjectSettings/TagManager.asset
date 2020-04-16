@@ -8,6 +8,7 @@ TagManager:
   - AvailableMatches
   - RightController
   - LeftController
+  - Grabbable
   layers:
   - Default
   - TransparentFX

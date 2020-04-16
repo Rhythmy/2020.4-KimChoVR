@@ -16,12 +16,10 @@ GameObject:
   - component: {fileID: 6502288161776079616}
   - component: {fileID: 6502288161776079645}
   - component: {fileID: 6502288161776079623}
-  - component: {fileID: 6502288161776079620}
-  - component: {fileID: 6502288161776079627}
   - component: {fileID: 6502288161776079646}
   m_Layer: 0
   m_Name: PingPongBallPrefab
-  m_TagString: Untagged
+  m_TagString: Grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatObject: {fileID: 6502288161776079645}
   ASLTransformScript: {fileID: 6502288161776079623}
+  objectToFollow: {fileID: 0}
   leftGrab: 0
   rightGrab: 0
   attachToHand: 0
@@ -174,103 +173,6 @@ MonoBehaviour:
   m_Angle: 0
   m_ScaleToAmount: {x: 0, y: 0, z: 0}
   m_AdditiveScaleAmount: {x: 0, y: 0, z: 0}
---- !u!114 &6502288161776079620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6502288161776079625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5afd5316c63705643b3daba5a6e923bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTetherWhenManipulating: 0
---- !u!114 &6502288161776079627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6502288161776079625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03daa81ea5f685f4ebf6e32038d058ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hostTransform: {fileID: 0}
-  manipulationType: 2
-  twoHandedManipulationType: 5
-  allowFarManipulation: 1
-  oneHandRotationModeNear: 6
-  oneHandRotationModeFar: 6
-  releaseBehavior: -1
-  constraintOnRotation: 0
-  useLocalSpaceForConstraint: 0
-  constraintOnMovement: 0
-  smoothingActive: 1
-  smoothingAmountOneHandManip: 0.001
-  onManipulationStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6502288161776079616}
-        m_TargetAssemblyTypeName: ObjectController, Assembly-CSharp
-        m_MethodName: ClaimMe
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6502288161776079616}
-        m_TargetAssemblyTypeName: ObjectController, Assembly-CSharp
-        m_MethodName: makeKinematic
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onManipulationEnded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6502288161776079616}
-        m_TargetAssemblyTypeName: ObjectController, Assembly-CSharp
-        m_MethodName: releaseKinematic
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6502288161776079646}
-        m_TargetAssemblyTypeName: ThrowingScript, Assembly-CSharp
-        m_MethodName: simulateThrow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  onHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6502288161776079646
 MonoBehaviour:
   m_ObjectHideFlags: 0

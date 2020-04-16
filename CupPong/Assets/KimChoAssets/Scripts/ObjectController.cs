@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 
-public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMixedRealityFocusChangedHandler
+public class ObjectController : MonoBehaviour
 {
     // Scripts
     public SimpleDemos.SendFloatArray_Example floatObject;
@@ -38,7 +38,6 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
 
         handleObjectKinematic();
 
-        // If the object is ours, then do nothing with it.
         if (!this.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
         {
             return;
@@ -52,24 +51,20 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
 
     public void sendTransformUpdates()
     {
-        if (!this.previousPosition.Equals(this.transform.position) ||
-            !this.previousRotation.Equals(this.transform.localEulerAngles))
-        {
-            // Handle Position
-            this.ASLTransformScript.m_MoveToPosition = objectToFollow.transform.position;
+        // Handle Position
+        this.ASLTransformScript.m_MoveToPosition = objectToFollow.transform.position;
 
-            // Handle Scale
-            this.ASLTransformScript.m_ScaleToAmount = objectToFollow.transform.localScale;
+        // Handle Scale
+        this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale;
 
-            // Handle Rotation
-            this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
-            this.ASLTransformScript.m_MyCustomAxis = objectToFollow.transform.eulerAngles;
+        // Handle Rotation
+        this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
+        this.ASLTransformScript.m_MyCustomAxis = objectToFollow.transform.eulerAngles;
 
-            this.previousPosition = objectToFollow.transform.position;
-            this.previousRotation = objectToFollow.transform.localEulerAngles;
+        this.previousPosition = objectToFollow.transform.position;
+        this.previousRotation = objectToFollow.transform.localEulerAngles;
 
-            this.ASLTransformScript.m_SendTransform = true;
-        }
+        this.ASLTransformScript.m_SendTransform = true;
     }
 
     public void makeKinematic()
@@ -92,6 +87,14 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
             {
                 if (this.gameObject.GetComponent<Rigidbody>() != null)
                 {
+                    if (objectToFollow != null)
+                    {
+                        floatObject.m_MyFloats[0] = 1.0f;
+                    } else
+                    {
+                        floatObject.m_MyFloats[0] = 0.0f;
+                    }
+
                     if (floatObject.m_MyFloats[0] > 0.9 && floatObject.m_MyFloats[0] < 1.1)
                     {
                         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -120,78 +123,5 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
                 Debug.Log("Already own this object");
             }
         }
-    }
-
-    public void OnBeforeFocusChange(FocusEventData eventData)
-    {
-    }
-
-    public void OnFocusChanged(FocusEventData eventData)
-    {
-    }
-
-    public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-    }
-
-    public void OnPointerDown(MixedRealityPointerEventData eventData)
-    {
-        if (floatObject == null)
-        {
-            return;
-        }
-
-        if (eventData != null)
-        {
-            if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Left)
-            {
-                leftGrab = true;
-            }
-
-            if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Right)
-            {
-                rightGrab = true;
-            }
-
-            floatObject.m_MyFloats[0] = 1;
-            objectToFollow = eventData.Pointer.Result.CurrentPointerTarget;
-        }
-    }
-
-    public void OnPointerDragged(MixedRealityPointerEventData eventData)
-    {
-        if (floatObject == null)
-        {
-            return;
-        }
-
-        if (floatObject.m_MyFloats[0] == 1)
-        {
-            objectToFollow = eventData.Pointer.Result.CurrentPointerTarget;
-        }
-    }
-
-    public void OnPointerUp(MixedRealityPointerEventData eventData)
-    {
-        if (floatObject == null)
-        {
-            return;
-        }
-
-        if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Left)
-        {
-            leftGrab = false;
-        }
-
-        if (eventData.Pointer.Controller.ControllerHandedness == Handedness.Right)
-        {
-            rightGrab = false;
-        }
-
-        if (!leftGrab && !rightGrab)
-        {
-            floatObject.m_MyFloats[0] = 0;
-        }
-        objectToFollow = null;
     }
 }
