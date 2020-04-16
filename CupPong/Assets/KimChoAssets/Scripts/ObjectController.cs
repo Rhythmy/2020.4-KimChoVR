@@ -20,6 +20,7 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
     // Flags
     public bool leftGrab;
     public bool rightGrab;
+    public bool attachToHand;
 
     // Private Data
     private Vector3 previousPosition;
@@ -151,7 +152,10 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
             }
 
             floatObject.m_MyFloats[0] = 1;
-            this.transform.position = eventData.Pointer.Position;
+            if (attachToHand)
+            {
+                this.transform.position = eventData.Pointer.Position;
+            }
         }
     }
 
@@ -164,7 +168,10 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
 
         if (floatObject.m_MyFloats[0] == 1)
         {
-            this.transform.position = eventData.Pointer.Position;
+            if (attachToHand)
+            {
+                this.transform.position = eventData.Pointer.Position;
+            }
         }
     }
 

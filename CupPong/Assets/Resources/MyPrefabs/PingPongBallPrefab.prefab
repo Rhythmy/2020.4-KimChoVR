@@ -134,6 +134,7 @@ MonoBehaviour:
   ASLTransformScript: {fileID: 6502288161776079623}
   leftGrab: 0
   rightGrab: 0
+  attachToHand: 0
 --- !u!114 &6502288161776079645
 MonoBehaviour:
   m_ObjectHideFlags: 0
