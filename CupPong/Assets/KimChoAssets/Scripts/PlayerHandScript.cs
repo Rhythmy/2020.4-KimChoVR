@@ -35,12 +35,14 @@ public class PlayerHandScript : MonoBehaviour
         if (grabbedObject != null && grabbedObject.GetComponent<ObjectController>() != null)
         {
             grabbedObject.GetComponent<ObjectController>().objectToFollow = this.gameObject;
+            grabbedObject.GetComponent<SimpleDemos.SendFloatArray_Example>().m_MyFloats[0] = 1f;
         }
 
         if (!isTriggerDown)
         {
             if (grabbedObject != null && grabbedObject.GetComponent<ObjectController>() != null)
             {
+                grabbedObject.GetComponent<SimpleDemos.SendFloatArray_Example>().m_MyFloats[0] = 0f;
                 grabbedObject.GetComponent<ThrowingScript>().simulateThrow();
                 grabbedObject.GetComponent<ObjectController>().objectToFollow = null;
             }

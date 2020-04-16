@@ -35,7 +35,6 @@ public class ObjectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         handleObjectKinematic();
 
         if (!this.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
@@ -51,20 +50,24 @@ public class ObjectController : MonoBehaviour
 
     public void sendTransformUpdates()
     {
-        // Handle Position
-        this.ASLTransformScript.m_MoveToPosition = objectToFollow.transform.position;
+        if (!this.previousPosition.Equals(this.transform.position) ||
+            !this.previousRotation.Equals(this.transform.localEulerAngles))
+        {
+            // Handle Position
+            this.ASLTransformScript.m_MoveToPosition = objectToFollow.transform.position;
 
-        // Handle Scale
-        this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale;
+            // Handle Scale
+            this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale;
 
-        // Handle Rotation
-        this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
-        this.ASLTransformScript.m_MyCustomAxis = objectToFollow.transform.eulerAngles;
+            // Handle Rotation
+            this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
+            this.ASLTransformScript.m_MyCustomAxis = objectToFollow.transform.eulerAngles;
 
-        this.previousPosition = objectToFollow.transform.position;
-        this.previousRotation = objectToFollow.transform.localEulerAngles;
+            this.previousPosition = objectToFollow.transform.position;
+            this.previousRotation = objectToFollow.transform.localEulerAngles;
 
-        this.ASLTransformScript.m_SendTransform = true;
+            this.ASLTransformScript.m_SendTransform = true;
+        }
     }
 
     public void makeKinematic()
@@ -87,14 +90,6 @@ public class ObjectController : MonoBehaviour
             {
                 if (this.gameObject.GetComponent<Rigidbody>() != null)
                 {
-                    if (objectToFollow != null)
-                    {
-                        floatObject.m_MyFloats[0] = 1.0f;
-                    } else
-                    {
-                        floatObject.m_MyFloats[0] = 0.0f;
-                    }
-
                     if (floatObject.m_MyFloats[0] > 0.9 && floatObject.m_MyFloats[0] < 1.1)
                     {
                         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
