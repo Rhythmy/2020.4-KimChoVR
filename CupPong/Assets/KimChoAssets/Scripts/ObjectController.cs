@@ -15,7 +15,7 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
     public SimpleDemos.TransformObjectViaLocalSpace_Example ASLTransformScript;
 
     // GameObjects
-    //public GameObject objectToFollow;
+    public GameObject objectToFollow;
 
     // Flags
     public bool leftGrab;
@@ -39,13 +39,15 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
         handleObjectKinematic();
 
         // If the object is ours, then do nothing with it.
-        if (this.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
+        if (!this.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
         {
             return;
         }
-        
-        sendTransformUpdates();
 
+        if (objectToFollow != null)
+        {
+            sendTransformUpdates();
+        }
     }
 
     public void sendTransformUpdates()
@@ -54,17 +56,17 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
             !this.previousRotation.Equals(this.transform.localEulerAngles))
         {
             // Handle Position
-            this.ASLTransformScript.m_MoveToPosition = this.transform.position;
+            this.ASLTransformScript.m_MoveToPosition = objectToFollow.transform.position;
 
             // Handle Scale
-            this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale;
+            this.ASLTransformScript.m_ScaleToAmount = objectToFollow.transform.localScale;
 
             // Handle Rotation
             this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
-            this.ASLTransformScript.m_MyCustomAxis = this.transform.eulerAngles;
+            this.ASLTransformScript.m_MyCustomAxis = objectToFollow.transform.eulerAngles;
 
-            this.previousPosition = this.transform.position;
-            this.previousRotation = this.transform.localEulerAngles;
+            this.previousPosition = objectToFollow.transform.position;
+            this.previousRotation = objectToFollow.transform.localEulerAngles;
 
             this.ASLTransformScript.m_SendTransform = true;
         }
@@ -152,10 +154,7 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
             }
 
             floatObject.m_MyFloats[0] = 1;
-            if (attachToHand)
-            {
-                this.transform.position = eventData.Pointer.Position;
-            }
+            objectToFollow = eventData.Pointer.Result.CurrentPointerTarget;
         }
     }
 
@@ -168,10 +167,7 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
 
         if (floatObject.m_MyFloats[0] == 1)
         {
-            if (attachToHand)
-            {
-                this.transform.position = eventData.Pointer.Position;
-            }
+            objectToFollow = eventData.Pointer.Result.CurrentPointerTarget;
         }
     }
 
@@ -196,5 +192,6 @@ public class ObjectController : MonoBehaviour, IMixedRealityPointerHandler, IMix
         {
             floatObject.m_MyFloats[0] = 0;
         }
+        objectToFollow = null;
     }
 }
