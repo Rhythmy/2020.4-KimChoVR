@@ -113,6 +113,11 @@ namespace SimpleDemos
         {
             //An example of how we can get a handle to our object that we just created but want to use later
             m_HandleToFreshObjects.Add(_gameObject);
+
+            _gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            {
+                Debug.Log("Created and claimed");
+            });
         }
 
         /// <summary>

@@ -149,7 +149,7 @@ MonoBehaviour:
   m_ObjectToSendFloats: {fileID: 6502288161776079625}
   m_SendFloat: 0
   m_MyFloats:
-  - 1
+  - 0
 --- !u!114 &6502288161776079623
 MonoBehaviour:
   m_ObjectHideFlags: 0

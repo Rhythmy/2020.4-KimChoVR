@@ -47,7 +47,7 @@ public class PlayerAvatarScript : MonoBehaviour
 
         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
-        ClaimMe();
+        // ClaimMe();
     }
 
     // Update is called once per frame
