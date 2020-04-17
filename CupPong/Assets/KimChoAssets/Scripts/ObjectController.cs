@@ -14,8 +14,7 @@ public class ObjectController : MonoBehaviour
     public SimpleDemos.SendFloatArray_Example floatObject;
     public SimpleDemos.TransformObjectViaLocalSpace_Example ASLTransformScript;
 
-    // GameObjects
-    public GameObject objectToFollow;
+    public GameObject objectToSyncWith;
 
     // Flags
     public bool leftGrab;
@@ -39,13 +38,11 @@ public class ObjectController : MonoBehaviour
 
         if (!this.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
         {
+            SyncLocally();
             return;
         }
-
-        if (objectToFollow != null)
-        {
-            sendTransformUpdates();
-        }
+        
+        sendTransformUpdates();
     }
 
     public void sendTransformUpdates()
@@ -54,17 +51,17 @@ public class ObjectController : MonoBehaviour
             !this.previousRotation.Equals(this.transform.localEulerAngles))
         {
             // Handle Position
-            this.ASLTransformScript.m_MoveToPosition = objectToFollow.transform.position;
+            this.ASLTransformScript.m_MoveToPosition = this.transform.position;
 
             // Handle Scale
             this.ASLTransformScript.m_ScaleToAmount = this.transform.localScale;
 
             // Handle Rotation
             this.ASLTransformScript.m_MyRotationAxis = SimpleDemos.TransformObjectViaLocalSpace_Example.RotationAxis.custom;
-            this.ASLTransformScript.m_MyCustomAxis = objectToFollow.transform.eulerAngles;
+            this.ASLTransformScript.m_MyCustomAxis = this.transform.eulerAngles;
 
-            this.previousPosition = objectToFollow.transform.position;
-            this.previousRotation = objectToFollow.transform.localEulerAngles;
+            this.previousPosition = this.transform.position;
+            this.previousRotation = this.transform.localEulerAngles;
 
             this.ASLTransformScript.m_SendTransform = true;
         }
@@ -118,5 +115,11 @@ public class ObjectController : MonoBehaviour
                 Debug.Log("Already own this object");
             }
         }
+    }
+
+    public void SyncLocally()
+    {
+        this.transform.position = objectToSyncWith.transform.position;
+        this.transform.rotation = objectToSyncWith.transform.rotation;
     }
 }

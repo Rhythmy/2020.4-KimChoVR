@@ -15,7 +15,8 @@ namespace SimpleDemos
         {
             CapsulePlayer,
             GizmoLeft,
-            GizmoRight
+            GizmoRight,
+            ASLSyncObject
         }
 
         /// <summary>The object type that will be created</summary>
@@ -59,6 +60,14 @@ namespace SimpleDemos
                 {
                     ASL.ASLHelper.InstanitateASLObject("GizmoRight",
                         new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, "", "UnityEngine.Rigidbody,UnityEngine",
+                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
+                        ClaimRecoveryFunction,
+                        MyFloatsFunction);
+                }
+                else if (m_CreateObject == ObjectToCreate.ASLSyncObject)
+                {
+                    ASL.ASLHelper.InstanitateASLObject("ASLSyncObject",
+                        new Vector3(1, 1, 1), Quaternion.identity, "", "",
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,
                         MyFloatsFunction);

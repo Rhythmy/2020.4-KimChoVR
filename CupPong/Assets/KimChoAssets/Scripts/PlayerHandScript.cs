@@ -32,19 +32,22 @@ public class PlayerHandScript : MonoBehaviour
             isTriggerDown = false;
         }
 
-        if (grabbedObject != null && grabbedObject.GetComponent<ObjectController>() != null)
+        if (grabbedObject == null)
         {
-            grabbedObject.GetComponent<ObjectController>().objectToFollow = this.gameObject;
-            grabbedObject.GetComponent<SimpleDemos.SendFloatArray_Example>().m_MyFloats[0] = 1f;
+            return;
+        }
+
+        if (grabbedObject.GetComponent<ObjectController>() != null)
+        {
+            grabbedObject.transform.position = this.transform.position;
         }
 
         if (!isTriggerDown)
         {
-            if (grabbedObject != null && grabbedObject.GetComponent<ObjectController>() != null)
+            if (grabbedObject.GetComponent<ObjectController>() != null)
             {
-                grabbedObject.GetComponent<SimpleDemos.SendFloatArray_Example>().m_MyFloats[0] = 0f;
+                grabbedObject.GetComponent<ObjectController>().releaseKinematic();
                 grabbedObject.GetComponent<ThrowingScript>().simulateThrow();
-                grabbedObject.GetComponent<ObjectController>().objectToFollow = null;
             }
             grabbedObject = null;
         }
@@ -77,6 +80,7 @@ public class PlayerHandScript : MonoBehaviour
             {
                 grabbedObject = selectedObject;
                 grabbedObject.GetComponent<ObjectController>().ClaimMe();
+                grabbedObject.GetComponent<ObjectController>().makeKinematic();
             }
         }
         else if (handedness == Handedness.Right)
@@ -85,6 +89,7 @@ public class PlayerHandScript : MonoBehaviour
             {
                 grabbedObject = selectedObject;
                 grabbedObject.GetComponent<ObjectController>().ClaimMe();
+                grabbedObject.GetComponent<ObjectController>().makeKinematic();
             }
         }
     }

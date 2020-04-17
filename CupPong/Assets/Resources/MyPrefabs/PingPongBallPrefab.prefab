@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6502288161776079645}
   - component: {fileID: 6502288161776079623}
   - component: {fileID: 6502288161776079646}
+  - component: {fileID: 7118325768434419048}
   m_Layer: 0
   m_Name: PingPongBallPrefab
   m_TagString: Grabbable
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatObject: {fileID: 6502288161776079645}
   ASLTransformScript: {fileID: 6502288161776079623}
-  objectToFollow: {fileID: 0}
+  objectToSyncWith: {fileID: 0}
   leftGrab: 0
   rightGrab: 0
   attachToHand: 0
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78c4dcfa4a825194c8566a00297ede07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObjectToManipulate: {fileID: 6502288161776079625}
+  m_ObjectToManipulate: {fileID: 0}
   m_SendTransform: 0
   m_SendAdditiveTransform: 0
   m_Reset: 0
@@ -186,3 +187,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6502288161776079644}
+--- !u!114 &7118325768434419048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502288161776079625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ba9c1281dde1046a12e93d41291166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ASLObjectToSpawn: {fileID: 4824126673856139431, guid: 76e3d7fcad661c74cbad178b7c49edd8, type: 3}
+  objectToSyncWith: {fileID: 0}
+  objectController: {fileID: 0}

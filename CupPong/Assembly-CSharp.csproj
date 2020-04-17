@@ -96,6 +96,7 @@
     <Compile Include="Assets\KimChoAssets\DeprecatedScripts\AttachToHandScript.cs" />
     <Compile Include="Assets\KimChoAssets\DeprecatedScripts\DebugScript.cs" />
     <Compile Include="Assets\KimChoAssets\DeprecatedScripts\SendPositionUpdates.cs" />
+    <Compile Include="Assets\KimChoAssets\Scripts\ASLObjectSync.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\DontDestroyMR.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\DontDestroyRaycast.cs" />
     <Compile Include="Assets\KimChoAssets\Scripts\ObjectController.cs" />
