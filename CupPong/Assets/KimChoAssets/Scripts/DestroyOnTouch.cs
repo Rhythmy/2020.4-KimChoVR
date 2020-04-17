@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class DestroyOnTouch : MonoBehaviour
 {
+    public enum DestroyOption
+    {
+        DestroySelf,
+        DoNotDestroySelf
+    }
+
+    public DestroyOption option;
     public GameObject parent;
     public SimpleDemos.DeleteObject_Example deleteScript;
 
@@ -14,13 +21,25 @@ public class DestroyOnTouch : MonoBehaviour
             return;
         }
 
-        if (other.tag == "Grabbable")
+        if (option == DestroyOption.DestroySelf)
         {
-            if (other.GetComponent<SimpleDemos.DeleteObject_Example>() != null)
+            if (other.tag == "Grabbable")
             {
-                other.GetComponent<SimpleDemos.DeleteObject_Example>().m_Delete = true;
+                if (other.GetComponent<SimpleDemos.DeleteObject_Example>() != null)
+                {
+                    other.GetComponent<SimpleDemos.DeleteObject_Example>().m_Delete = true;
+                }
+                deleteScript.m_Delete = true;
             }
-            deleteScript.m_Delete = true;
+        } else if (option == DestroyOption.DoNotDestroySelf)
+        {
+            if (other.tag == "Grabbable")
+            {
+                if (other.GetComponent<SimpleDemos.DeleteObject_Example>() != null)
+                {
+                    other.GetComponent<SimpleDemos.DeleteObject_Example>().m_Delete = true;
+                }
+            }
         }
     }
 }
