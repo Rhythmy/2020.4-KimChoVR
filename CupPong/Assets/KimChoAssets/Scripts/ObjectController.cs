@@ -69,12 +69,22 @@ public class ObjectController : MonoBehaviour
 
     public void makeKinematic()
     {
+        if (this.floatObject == null)
+        {
+            return;
+        }
+
         this.floatObject.m_MyFloats[0] = 1.0f;
         this.floatObject.m_SendFloat = true;
     }
 
     public void releaseKinematic()
     {
+        if (this.floatObject == null)
+        {
+            return;
+        }
+
         this.floatObject.m_MyFloats[0] = 0.0f;
         this.floatObject.m_SendFloat = true;
     }

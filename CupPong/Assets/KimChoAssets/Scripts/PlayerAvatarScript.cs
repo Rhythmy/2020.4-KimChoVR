@@ -46,6 +46,8 @@ public class PlayerAvatarScript : MonoBehaviour
         this.previousRotation = avatarPartToSyncWith.transform.localEulerAngles;
 
         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+        ClaimMe();
     }
 
     // Update is called once per frame
@@ -123,5 +125,23 @@ public class PlayerAvatarScript : MonoBehaviour
         this.previousRotation = avatarPartToSyncWith.transform.localEulerAngles;
 
         this.sendPositionScript.m_SendTransform = true;
+    }
+
+    public void ClaimMe()
+    {
+        if (this.gameObject.GetComponent<ASL.ASLObject>() != null)
+        {
+            if (!this.gameObject.gameObject.GetComponent<ASL.ASLObject>().m_Mine)
+            {
+                this.gameObject.gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                {
+                    Debug.Log("Successfully claimed object! " + this.gameObject.name);
+                });
+            }
+            else
+            {
+                Debug.Log("Already own this object");
+            }
+        }
     }
 }

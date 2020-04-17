@@ -40,6 +40,7 @@ public class PlayerHandScript : MonoBehaviour
         if (grabbedObject.GetComponent<ObjectController>() != null)
         {
             grabbedObject.transform.position = this.transform.position;
+            grabbedObject.transform.rotation = this.transform.rotation;
         }
 
         if (!isTriggerDown)
@@ -47,7 +48,10 @@ public class PlayerHandScript : MonoBehaviour
             if (grabbedObject.GetComponent<ObjectController>() != null)
             {
                 grabbedObject.GetComponent<ObjectController>().releaseKinematic();
-                grabbedObject.GetComponent<ThrowingScript>().simulateThrow();
+                if (grabbedObject.GetComponent<ThrowingScript>() != null)
+                {
+                    grabbedObject.GetComponent<ThrowingScript>().simulateThrow();
+                }
             }
             grabbedObject = null;
         }
