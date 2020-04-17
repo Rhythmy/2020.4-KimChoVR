@@ -16,7 +16,7 @@ namespace SimpleDemos
             CapsulePlayer,
             GizmoLeft,
             GizmoRight,
-            ASLSyncObject
+            PingPongBall
         }
 
         /// <summary>The object type that will be created</summary>
@@ -27,6 +27,7 @@ namespace SimpleDemos
 
         /// <summary> Handle to the latest Full Prefab object created</summary>
         private static List<GameObject> m_HandleToFreshObjects = new List<GameObject>();
+        private static bool doingCallback = false;
 
         /// <summary>  Holds the rotation of our object so it gets updated properly - see Transform example for better explanation</summary>
         private Quaternion m_RotationHolder;
@@ -42,6 +43,8 @@ namespace SimpleDemos
         {
             if (m_SpawnObject)
             {
+                m_SpawnObject = false; //Reset to false to prevent multiple unwanted spawns
+
                 if (m_CreateObject == ObjectToCreate.CapsulePlayer)
                 {
                     ASL.ASLHelper.InstanitateASLObject("Capsule_Player",
@@ -64,42 +67,30 @@ namespace SimpleDemos
                         ClaimRecoveryFunction,
                         MyFloatsFunction);
                 }
-                else if (m_CreateObject == ObjectToCreate.ASLSyncObject)
+                else if (m_CreateObject == ObjectToCreate.PingPongBall)
                 {
+                    ASL.ASLHelper.InstanitateASLObject("PingPongBallPrefab",
+                        new Vector3(1, 1, 1), Quaternion.identity, "", "",
+                        WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
+                        ClaimRecoveryFunction,
+                        MyFloatsFunction);
+
                     ASL.ASLHelper.InstanitateASLObject("ASLSyncObject",
                         new Vector3(1, 1, 1), Quaternion.identity, "", "",
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,
                         MyFloatsFunction);
                 }
-
-                m_SpawnObject = false; //Reset to false to prevent multiple unwanted spawns
             }
-
-            //For each object we created with full prefab - spin.
-            //This is also a good way to stress test your system - to see how many objects you can have concurrently sending commands
-            //A better way to continually rotate an object would be to set it in motion and then let local handle the actual rotation, with
-            //ASL only updating it when it changes. This example does not do that - it sends the rotation continually over the network for all
-            //objects.
-            foreach (var _object in m_HandleToFreshObjects)
-            {
-                _object.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                {
-                    Quaternion.AngleAxis(45f, Vector3.up);
-                    m_RotationHolder = Quaternion.AngleAxis(1f, Vector3.up);
-                    _object.GetComponent<ASL.ASLObject>().SendAndIncrementLocalRotation(m_RotationHolder);
-                });
-            }
-            
         }
 
         /// <summary>
         /// This function is how you get a handle to the object you just created
         /// </summary>
         /// <param name="_myGameObject">A handle to the gameobject that was just created</param>
-        public static void WhatToDoWithMyGameObjectNowThatItIsCreated(GameObject _myGameObject)
+        public void WhatToDoWithMyGameObjectNowThatItIsCreated(GameObject _myGameObject)
         {
-            //Change the color
+              //Change the color
             _myGameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
             {
                 _myGameObject.GetComponent<ASL.ASLObject>().SendAndSetObjectColor(new Color(0.7830189f, 0.3792925f, 03324135f, 1), new Color(0, 0, 0));
@@ -122,6 +113,14 @@ namespace SimpleDemos
         {
             //An example of how we can get a handle to our object that we just created but want to use later
             m_HandleToFreshObjects.Add(_gameObject);
+
+            if (_gameObject.tag == "ASLObject")
+            {
+                _gameObject.transform.position = m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].transform.position;
+                _gameObject.transform.rotation = m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].transform.rotation;
+                m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].GetComponent<ObjectController>().objectToSyncWith = _gameObject;
+                m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].GetComponent<SimpleDemos.TransformObjectViaLocalSpace_Example>().m_ObjectToManipulate = _gameObject;
+            }
         }
 
         /// <summary>

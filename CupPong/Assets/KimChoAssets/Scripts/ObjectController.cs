@@ -1,12 +1,4 @@
-﻿using Microsoft.MixedReality.Toolkit.Input;
-using Microsoft.MixedReality.Toolkit.Physics;
-using Microsoft.MixedReality.Toolkit.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 public class ObjectController : MonoBehaviour
 {
@@ -50,6 +42,14 @@ public class ObjectController : MonoBehaviour
         if (!this.previousPosition.Equals(this.transform.position) ||
             !this.previousRotation.Equals(this.transform.localEulerAngles))
         {
+            this.objectToSyncWith.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            {
+                Debug.Log("Successfully claimed object! " + this.gameObject.name);
+            });
+
+            Debug.Log(this.objectToSyncWith.GetComponent<ASL.ASLObject>().m_Id);
+            Debug.Log(this.gameObject.GetComponent<ASL.ASLObject>().m_Id);
+
             // Handle Position
             this.ASLTransformScript.m_MoveToPosition = this.transform.position;
 

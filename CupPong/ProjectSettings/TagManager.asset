@@ -9,6 +9,7 @@ TagManager:
   - RightController
   - LeftController
   - Grabbable
+  - ASLObject
   layers:
   - Default
   - TransparentFX

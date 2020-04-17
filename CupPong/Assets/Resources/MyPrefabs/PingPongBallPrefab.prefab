@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6502288161776079645}
   - component: {fileID: 6502288161776079623}
   - component: {fileID: 6502288161776079646}
-  - component: {fileID: 7118325768434419048}
+  - component: {fileID: 3065296272983052985}
   m_Layer: 0
   m_Name: PingPongBallPrefab
   m_TagString: Grabbable
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6502288161776079644}
---- !u!114 &7118325768434419048
+--- !u!114 &3065296272983052985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,9 +196,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6502288161776079625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4ba9c1281dde1046a12e93d41291166, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e95a2006f31ccc4a936f656afbcca56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ASLObjectToSpawn: {fileID: 4824126673856139431, guid: 76e3d7fcad661c74cbad178b7c49edd8, type: 3}
-  objectToSyncWith: {fileID: 0}
-  objectController: {fileID: 0}
+  m_CreateObject: 3
+  m_SpawnObject: 0
