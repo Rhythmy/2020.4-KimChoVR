@@ -70,13 +70,13 @@ namespace SimpleDemos
                 else if (m_CreateObject == ObjectToCreate.PingPongBall)
                 {
                     ASL.ASLHelper.InstanitateASLObject("PingPongBallPrefab",
-                        new Vector3(1, 1, 1), Quaternion.identity, "", "",
+                        new Vector3(1, 1, 1), Quaternion.identity, "InteractiveContainer", "",
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,
                         MyFloatsFunction);
 
                     ASL.ASLHelper.InstanitateASLObject("ASLSyncObject",
-                        new Vector3(1, 1, 1), Quaternion.identity, "", "",
+                        new Vector3(1, 1, 1), Quaternion.identity, "InteractiveContainer", "",
                         WhatToDoWithMyOtherGameObjectNowThatItIsCreated,
                         ClaimRecoveryFunction,
                         MyFloatsFunction);
@@ -113,14 +113,6 @@ namespace SimpleDemos
         {
             //An example of how we can get a handle to our object that we just created but want to use later
             m_HandleToFreshObjects.Add(_gameObject);
-
-            if (_gameObject.tag == "ASLObject")
-            {
-                _gameObject.transform.position = m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].transform.position;
-                _gameObject.transform.rotation = m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].transform.rotation;
-                m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].GetComponent<ObjectController>().objectToSyncWith = _gameObject;
-                m_HandleToFreshObjects[m_HandleToFreshObjects.Count - 2].GetComponent<SimpleDemos.TransformObjectViaLocalSpace_Example>().m_ObjectToManipulate = _gameObject;
-            }
         }
 
         /// <summary>

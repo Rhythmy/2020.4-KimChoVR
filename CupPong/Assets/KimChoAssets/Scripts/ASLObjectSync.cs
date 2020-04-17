@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class ASLObjectSync : MonoBehaviour
 {
-    public GameObject ASLObjectToSpawn;
-    private GameObject objectToSyncWith;
-    private ObjectController objectController;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.GetComponent<SimpleDemos.CreateObject_Example>().m_SpawnObject = true;
+        this.transform.parent.GetChild(this.transform.GetSiblingIndex() - 1).GetComponent<ObjectController>().objectToSyncWith = this.gameObject;
+        this.transform.parent.GetChild(this.transform.GetSiblingIndex() - 1).GetComponent<SimpleDemos.TransformObjectViaLocalSpace_Example>().m_ObjectToManipulate = this.gameObject;
     }
 
     // Update is called once per frame

@@ -119,6 +119,10 @@ public class ObjectController : MonoBehaviour
 
     public void SyncLocally()
     {
+        if (objectToSyncWith == null)
+        {
+            return;
+        }
         this.transform.position = objectToSyncWith.transform.position;
         this.transform.rotation = objectToSyncWith.transform.rotation;
     }
